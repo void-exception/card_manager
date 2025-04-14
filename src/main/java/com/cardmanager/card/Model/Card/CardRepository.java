@@ -10,10 +10,12 @@ import java.util.Optional;
 
 public interface CardRepository extends CrudRepository<Card, Long> {
     List<Card> findAllByUser(User user);
+
     Optional<Card> findByCardNumber(String cardNumber);
 
     void deleteByUser(User user);
 
     Page<Card> findAllByStatus(CardStatus status, Pageable pageable);
+
     Page<Card> findAll(Pageable pageable);
 }
