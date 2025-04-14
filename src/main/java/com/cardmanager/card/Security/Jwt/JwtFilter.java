@@ -3,14 +3,15 @@ package com.cardmanager.card.Security.Jwt;
 import java.io.IOException;
 import java.util.Collections;
 
-import com.cardmanager.card.Security.Model.User;
-import com.cardmanager.card.Security.Service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.cardmanager.card.Security.Model.User;
+import com.cardmanager.card.Security.Service.SecurityService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
