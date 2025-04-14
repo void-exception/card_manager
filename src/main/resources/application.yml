@@ -1,0 +1,32 @@
+server:
+  port: 9090
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    password: Svatzapomni1
+    url: jdbc:postgresql://localhost:5432/cardmanager
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
+jwt:
+  secret: "$3crtCaRdMa3tew96y68uHeq8j1s2azWSz"
+
+encryption:
+  key: "AbGSDb8gveqPVB9z"
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
