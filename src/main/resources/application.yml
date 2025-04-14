@@ -7,7 +7,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/cardmanager
     username: postgres
-    password: Svatzapomni1
+    password: password
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
