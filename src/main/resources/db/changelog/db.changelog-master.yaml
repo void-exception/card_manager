@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changes/001-initial-schema.yaml
+      relativeToChangelogFile: false
+  - include:
+      file: db/changelog/changes/002-card-management-schema.yaml
+      relativeToChangelogFile: false 

@@ -5,20 +5,25 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    password: Svatzapomni1
     url: jdbc:postgresql://localhost:5432/cardmanager
     username: postgres
+    password: Svatzapomni1
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
+    show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-    show-sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: true
 
 jwt:
   secret: "$3crtCaRdMa3tew96y68uHeq8j1s2azWSz"
+
 
 encryption:
   key: "AbGSDb8gveqPVB9z"
