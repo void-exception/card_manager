@@ -1,5 +1,6 @@
 package com.cardmanager.card.Controller;
 
+import com.cardmanager.card.DTO.Card.CardDTO;
 import com.cardmanager.card.DTO.Limit.LimitResponse;
 import com.cardmanager.card.DTO.Statement.StatementDTO;
 import com.cardmanager.card.DTO.Statement.StatementResponse;
@@ -13,6 +14,7 @@ import com.cardmanager.card.Model.Statement.StatementRepository;
 import com.cardmanager.card.Security.Model.User;
 import com.cardmanager.card.Security.Model.UserRepository;
 import com.cardmanager.card.Service.Card.CardService;
+import com.cardmanager.card.Service.Card.EncodeService;
 import com.cardmanager.card.Service.Card.LimitService;
 import com.cardmanager.card.Service.User.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -46,10 +48,12 @@ public class AdminController {
     private LimitService limitService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private EncodeService encodeService;
 
     @Operation(summary = "Все карты", description = "Получения всех карт")
     @GetMapping("/cards")
-    public ResponseEntity<Page<Card>> getCards(@RequestParam(defaultValue = "0") @Parameter(description = "Номер страницы") int page,
+    public ResponseEntity<Page<CardDTO>> getCards(@RequestParam(defaultValue = "0") @Parameter(description = "Номер страницы") int page,
                                                @RequestParam(defaultValue = "10") @Parameter(description = "Количество элементов на странице") int size,
                                                @RequestParam(required = false) @Parameter(description = "Статус карты") CardStatus status){
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
@@ -60,7 +64,8 @@ public class AdminController {
         else {
             cardPage = cardRepository.findAllByStatus(status, pageable);
         }
-        return ResponseEntity.ok(cardPage);
+        Page<CardDTO> cardDTOPage = cardPage.map(card -> new CardDTO(card.getId(), encodeService.decryption(card.getCardNumber()), card.getUser().getName(), card.getUser().getEmail(), card.getEndDate(), card.getStatus(), card.getBalance()));
+        return ResponseEntity.ok(cardDTOPage);
     }
 
     @Operation(summary = "Все заявки", description = "Получения всех заявок")
