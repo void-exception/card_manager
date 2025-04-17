@@ -23,6 +23,7 @@ spring:
 
 jwt:
   secret: "$3crtCaRdMa3tew96y68uHeq8j1s2azWSz"
+  term: 5400000
 
 
 encryption:
